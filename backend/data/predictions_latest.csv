@@ -1,0 +1,11 @@
+team,match_date,goals,win,outcome
+Lakers,2024-05-01,110,1,win
+Celtics,2024-05-01,105,0,loss
+Lakers,2024-05-02,98,0,loss
+Celtics,2024-05-02,112,1,win
+Lakers,2024-05-03,120,1,win
+Celtics,2024-05-03,99,0,loss
+Lakers,2024-05-04,101,0,loss
+Celtics,2024-05-04,115,1,win
+Lakers,2024-05-05,108,1,win
+Celtics,2024-05-05,102,0,loss

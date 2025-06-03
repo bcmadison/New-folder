@@ -1,0 +1,11 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.5, pluggy-1.6.0
+rootdir: C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp
+plugins: anyio-4.9.0
+collected 1 item
+
+backend\tests\integration\test_api.py .                                  [100%]
+
+======================== 1 passed, 2 warnings in 3.52s ========================
+
+Logs saved to: logs/session_20250602_051104.log

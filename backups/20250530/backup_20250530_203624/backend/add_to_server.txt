@@ -1,0 +1,21 @@
+import sys
+sys.path.append('core')
+from logger import logger
+
+# Add to existing imports in server.py
+logger.logger.info("Starting AI Sports Betting Platform...")
+
+# Wrap all routes with try-except
+from functools import wraps
+
+def log_errors(func):
+    @wraps(func)
+    async def wrapper(*args, **kwargs):
+        try:
+            logger.logger.info(f"Calling {func.__name__}")
+            result = await func(*args, **kwargs)
+            return result
+        except Exception as e:
+            logger.logger.error(f"Error in {func.__name__}: {str(e^)}", exc_info=True)
+            raise
+    return wrapper

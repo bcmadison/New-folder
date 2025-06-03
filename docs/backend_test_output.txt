@@ -1,0 +1,54 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.5, pluggy-1.6.0
+rootdir: C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp
+plugins: anyio-3.7.1
+collected 2 items
+
+backend\tests\integration\test_api.py .                                  [ 50%]
+backend\tests\unit\test_health.py .                                      [100%]
+
+============================== 2 passed in 1.40s ==============================
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+ValueError: I/O operation on closed file.
+Call stack:
+  File "C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp\backend\core\auto_logger.py", line 42, in export_logs
+    self.logger.info("Exporting logs...")
+Message: 'Exporting logs...'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+ValueError: I/O operation on closed file.
+Call stack:
+  File "C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp\backend\core\auto_logger.py", line 42, in export_logs
+    self.logger.info("Exporting logs...")
+Message: 'Exporting logs...'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+ValueError: I/O operation on closed file.
+Call stack:
+  File "C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp\backend\core\auto_logger.py", line 42, in export_logs
+    self.logger.info("Exporting logs...")
+Message: 'Exporting logs...'
+Arguments: ()
+--- Logging error ---
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2800.0_x64__qbz5n2kfra8p0\Lib\logging\__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+ValueError: I/O operation on closed file.
+Call stack:
+  File "C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp\backend\core\auto_logger.py", line 42, in export_logs
+    self.logger.info("Exporting logs...")
+Message: 'Exporting logs...'
+Arguments: ()
+
+Logs saved to: logs/session_20250601_195023.log
+
+Logs saved to: logs/session_20250601_195022.log

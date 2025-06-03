@@ -1,0 +1,165 @@
+# System Analysis Tool Configuration
+
+# Analysis settings
+analysis:
+  # Performance analysis
+  performance:
+    enabled: true
+    interval: 300  # seconds
+    metrics:
+      - cpu_usage
+      - memory_usage
+      - disk_io
+      - network_io
+      - process_stats
+    thresholds:
+      cpu_warning: 80
+      cpu_critical: 90
+      memory_warning: 75
+      memory_critical: 85
+      disk_warning: 80
+      disk_critical: 90
+
+  # Security analysis
+  security:
+    enabled: true
+    interval: 3600  # seconds
+    checks:
+      - open_ports
+      - running_services
+      - system_updates
+      - firewall_status
+      - antivirus_status
+      - ssl_certificates
+    vulnerability_scan:
+      enabled: true
+      interval: 86400  # 24 hours
+      severity_threshold: medium
+
+  # Resource analysis
+  resources:
+    enabled: true
+    interval: 600  # seconds
+    metrics:
+      - disk_space
+      - memory_usage
+      - swap_usage
+      - file_system
+      - process_resources
+    cleanup:
+      enabled: true
+      threshold: 90  # percentage
+      target_directories:
+        - /tmp
+        - /var/log
+        - /var/cache
+
+# Monitoring settings
+monitoring:
+  # Logging configuration
+  logging:
+    level: INFO
+    format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+    file: "logs/system_analysis.log"
+    max_size: 10485760  # 10MB
+    backup_count: 5
+    console_output: true
+
+  # Alerting configuration
+  alerts:
+    enabled: true
+    channels:
+      email:
+        enabled: true
+        smtp_server: "smtp.gmail.com"
+        smtp_port: 587
+        use_tls: true
+        sender: "alerts@example.com"
+        recipients:
+          - "admin@example.com"
+      slack:
+        enabled: false
+        webhook_url: ""
+      webhook:
+        enabled: false
+        url: ""
+    thresholds:
+      warning: 70
+      critical: 85
+
+# Reporting settings
+reporting:
+  # Report generation
+  reports:
+    enabled: true
+    format: html
+    output_dir: "reports/"
+    retention: 30  # days
+    templates:
+      - name: "system_health"
+        schedule: "0 0 * * *"  # Daily at midnight
+      - name: "security_audit"
+        schedule: "0 0 * * 0"  # Weekly on Sunday
+      - name: "performance_summary"
+        schedule: "0 0 1 * *"  # Monthly on 1st
+
+  # Dashboard configuration
+  dashboard:
+    enabled: true
+    port: 8080
+    host: "localhost"
+    authentication:
+      enabled: true
+      method: "basic"
+    refresh_interval: 30  # seconds
+
+# Database settings
+database:
+  type: "sqlite"
+  path: "data/system_analysis.db"
+  backup:
+    enabled: true
+    interval: 86400  # 24 hours
+    retention: 7  # days
+    path: "backups/"
+
+# API settings
+api:
+  enabled: true
+  host: "localhost"
+  port: 8000
+  cors:
+    enabled: true
+    origins:
+      - "http://localhost:8080"
+  authentication:
+    enabled: true
+    method: "jwt"
+    secret_key: "your-secret-key-here"
+    token_expiry: 3600  # 1 hour
+
+# AI settings
+ai:
+  enabled: true
+  model:
+    type: "transformer"
+    path: "models/system_analysis_model"
+  training:
+    enabled: false
+    interval: 604800  # 7 days
+    batch_size: 32
+    epochs: 10
+  inference:
+    batch_size: 1
+    timeout: 30  # seconds
+
+# System settings
+system:
+  max_threads: 4
+  max_processes: 2
+  temp_dir: "temp/"
+  cache_dir: "cache/"
+  cleanup:
+    enabled: true
+    interval: 86400  # 24 hours
+    max_age: 604800  # 7 days 

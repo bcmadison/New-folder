@@ -1,0 +1,344 @@
+PrizePicks Data Integration & Goblin/Demon System Implementation
+PRIMARY OBJECTIVE
+Integrate real PrizePicks scraped data with accurate goblin/demon line modifications using PrizePicks' actual visual assets and imagery.
+
+Data Source Mapping
+Required Data Fields from PrizePicks:
+javascript
+
+Copy
+const prizePicksDataMapping = {
+  player_name: 'player',           // "Karl-Anthony Towns"
+  team_abbreviation: 'team',       // "NYK" 
+  position: 'position',            // "C-F"
+  opponent_team: 'opponent',       // "@ IND"
+  sport: 'sport',                  // "NBA"
+  game_time: 'gameTime',           // "Today 7:00pm"
+  pick_count: 'fireCount',         // "73.5K" (how many users picked this)
+  stat_type: 'stat',               // "Points", "Rebounds", "Assists", etc.
+  line_value: 'currentLine',       // 18.5 (the actual PrizePicks line)
+  projected_value: 'projectedValue', // Our AI projection: 22.5
+  confidence_percentage: 'percentage', // Our calculated win probability
+  
+  // PrizePicks Visual Assets
+  goblin_icon_url: 'goblinIcon',    // Use actual PrizePicks goblin image
+  demon_icon_url: 'demonIcon',      // Use actual PrizePicks demon image
+  normal_icon_url: 'normalIcon'     // Use actual PrizePicks standard icon
+};
+Goblin/Demon Line Calculation System
+javascript
+
+Copy
+const processPlayerProp = (prizePicksPlayer) => {
+  const originalLine = prizePicksPlayer.line_value; // e.g., 22.5
+  const projection = calculateProjection(prizePicksPlayer); // Our AI: e.g., 25.1
+  
+  // GOBLIN: Lines EASIER than PrizePicks line
+  const goblinLine = originalLine - GOBLIN_OFFSET; // Use PrizePicks' actual offset
+  const goblinPercentage = calculateWinProbability(projection, goblinLine);
+  
+  // DEMON: Lines HARDER than PrizePicks line  
+  const demonLine = originalLine + DEMON_OFFSET; // Use PrizePicks' actual offset
+  const demonPercentage = calculateWinProbability(projection, demonLine);
+  
+  // NORMAL: Original PrizePicks line
+  const normalPercentage = calculateWinProbability(projection, originalLine);
+  
+  return {
+    ...prizePicksPlayer,
+    detailedProps: [{
+      stat: prizePicksPlayer.stat_type,
+      projectedValue: projection,
+      options: [
+        { 
+          line: goblinLine, 
+          type: 'goblin', 
+          icon: prizePicksPlayer.goblin_icon_url, // Use actual PrizePicks goblin image
+          percentage: goblinPercentage,
+          multiplier: PRIZEPICKS_GOBLIN_MULTIPLIER // Use their actual multiplier
+        },
+        { 
+          line: originalLine, 
+          type: 'normal', 
+          icon: prizePicksPlayer.normal_icon_url, // Use actual PrizePicks normal image
+          percentage: normalPercentage,
+          multiplier: PRIZEPICKS_NORMAL_MULTIPLIER // Use their actual multiplier
+        },
+        { 
+          line: demonLine, 
+          type: 'demon', 
+          icon: prizePicksPlayer.demon_icon_url, // Use actual PrizePicks demon image
+          percentage: demonPercentage,
+          multiplier: PRIZEPICKS_DEMON_MULTIPLIER // Use their actual multiplier
+        }
+      ]
+    }],
+    winningProp: determineOptimalProp(goblinPercentage, normalPercentage, demonPercentage)
+  };
+};
+Prop Card Visual Requirements
+Required Display Elements:
+javascript
+
+Copy
+const propCardRequirements = {
+  // PrizePicks Data Display
+  playerImage: prizePicksData.player_image_url,
+  playerName: prizePicksData.player_name,
+  team: prizePicksData.team_abbreviation,
+  opponent: prizePicksData.opponent_team,
+  gameTime: prizePicksData.game_time,
+  fireCount: prizePicksData.pick_count,
+  
+  // Calculated Values
+  displayLine: selectedOption.line,
+  winProbability: selectedOption.percentage,
+  propType: selectedOption.type,
+  statType: prizePicksData.stat_type,
+  
+  // Visual Assets from PrizePicks
+  typeIcon: selectedOption.icon, // Use actual goblin/demon/normal images
+  teamColor: getTeamColor(prizePicksData.team_abbreviation),
+  confidenceGradient: generateConfidenceGradient(selectedOption.percentage)
+};
+Prop Card HTML Structure:
+html
+
+Copy
+<!-- Prop card structure with PrizePicks assets -->
+<div class="prop-card">
+  <!-- Player Image -->
+  <img src="{prizePicksData.player_image_url}" alt="{player_name}" />
+  
+  <!-- Fire Count Display -->
+  <div class="fire-count">
+    <img src="{prizepicks_fire_icon}" alt="fire" />
+    <span>{prizePicksData.pick_count}</span>
+  </div>
+  
+  <!-- Team Information -->
+  <div class="team-badge" style="background: {team_color}">
+    {prizePicksData.team_abbreviation} • {position}
+  </div>
+  
+  <!-- Player Details -->
+  <h3>{prizePicksData.player_name}</h3>
+  <div class="game-info">{prizePicksData.opponent_team} {prizePicksData.game_time}</div>
+  
+  <!-- Prop Display -->
+  <div class="prop-display">
+    <span class="stat-type">{prizePicksData.stat_type}</span>
+    <span class="win-probability">{calculated_percentage}%</span>
+    
+    <!-- Line Display with PrizePicks Icons -->
+    <div class="line-display">
+      <span class="line-value">{calculated_line}</span>
+      <img src="{prop_type_icon}" alt="{prop_type}" class="prop-type-icon" />
+    </div>
+  </div>
+  
+  <!-- Detailed Analysis Tooltip -->
+  <div class="analysis-tooltip">
+    <p>Historical Average: {historical_average}</p>
+    <p>PrizePicks Line: {original_line}</p>
+    <p>Modified Line: {modified_line}</p>
+    <p>Win Probability: {win_percentage}%</p>
+  </div>
+</div>
+Data Accuracy Requirements
+javascript
+
+Copy
+const dataValidation = {
+  // PrizePicks Source Data
+  validateSourceData: (data) => {
+    return {
+      hasValidLine: typeof data.line_value === 'number',
+      hasPlayerInfo: data.player_name && data.team_abbreviation,
+      hasGameInfo: data.game_time && data.opponent_team,
+      hasPickCount: data.pick_count !== undefined,
+      hasVisualAssets: data.player_image_url && data.goblin_icon_url && data.demon_icon_url
+    };
+  },
+  
+  // Calculated Values
+  validateCalculations: (processed) => {
+    return {
+      goblinLineValid: processed.goblinLine < processed.originalLine,
+      demonLineValid: processed.demonLine > processed.originalLine,
+      percentagesValid: processed.percentages.every(p => p >= 0 && p <= 100),
+      multipliersMatch: processed.multipliers === PRIZEPICKS_OFFICIAL_MULTIPLIERS
+    };
+  }
+};
+Filter System Implementation
+javascript
+
+Copy
+const filterSystem = {
+  'goblins': (props) => {
+    // Filter to show easier betting opportunities
+    return props.filter(prop => 
+      prop.winningProp.type === 'goblin' && 
+      prop.winningProp.percentage > GOBLIN_CONFIDENCE_THRESHOLD
+    );
+  },
+  
+  'demons': (props) => {
+    // Filter to show high-risk/high-reward opportunities
+    return props.filter(prop => 
+      prop.detailedProps[0].options.some(opt => 
+        opt.type === 'demon' && 
+        opt.percentage < DEMON_RISK_THRESHOLD
+      )
+    );
+  },
+  
+  'value-bets': (props) => {
+    // Filter based on edge between projection and line
+    return props.filter(prop => {
+      const edge = Math.abs(prop.projectedValue - prop.currentLine);
+      return edge > VALUE_BET_THRESHOLD;
+    });
+  },
+  
+  'high-confidence': (props) => {
+    // Filter for highest win probability regardless of type
+    return props.filter(prop => 
+      prop.winningProp.percentage > HIGH_CONFIDENCE_THRESHOLD
+    );
+  }
+};
+Real-Time Data Management
+javascript
+
+Copy
+const dataManagement = {
+  // Update Configuration
+  updateConfig: {
+    frequency: PRIZEPICKS_UPDATE_INTERVAL, // Match their update frequency
+    batchSize: OPTIMAL_BATCH_SIZE,
+    retryAttempts: MAX_RETRY_ATTEMPTS,
+    cacheExpiration: CACHE_DURATION_MINUTES
+  },
+  
+  // Live Updates Handler
+  handleLiveUpdates: async () => {
+    const updates = {
+      fireCount: await fetchLatestPickCounts(),
+      lineMovements: await detectLineChanges(),
+      playerStatus: await checkPlayerAvailability(),
+      gameStatus: await verifyGameSchedule()
+    };
+    
+    return processUpdates(updates);
+  },
+  
+  // Error Handling
+  errorHandling: {
+    onScraperFailure: () => useCachedDataWithTimestamp(),
+    onMissingPlayer: (playerId) => excludeFromDisplay(playerId),
+    onCalculationError: (prop) => fallbackToNormalLine(prop),
+    onAssetLoadFailure: (assetType) => useDefaultAsset(assetType)
+  }
+};
+Visual Asset Requirements
+javascript
+
+Copy
+const visualAssets = {
+  // Use PrizePicks Official Assets
+  icons: {
+    goblin: PRIZEPICKS_GOBLIN_IMAGE_URL,
+    demon: PRIZEPICKS_DEMON_IMAGE_URL,
+    normal: PRIZEPICKS_NORMAL_IMAGE_URL,
+    fire: PRIZEPICKS_FIRE_ICON_URL
+  },
+  
+  // Dynamic Styling Based on Confidence
+  getConfidenceStyles: (percentage) => {
+    return {
+      backgroundColor: interpolateColor(percentage),
+      borderColor: getBorderColorForConfidence(percentage),
+      glowIntensity: calculateGlowEffect(percentage)
+    };
+  },
+  
+  // Team Branding
+  teamColors: NBA_OFFICIAL_TEAM_COLORS,
+  
+  // Responsive Image Loading
+  imageLoading: {
+    strategy: 'lazy',
+    fallback: 'player-initials',
+    resolution: 'adaptive'
+  }
+};
+Implementation Checklist
+Data Integration:
+ Connect to PrizePicks data source
+ Map all required fields correctly
+ Validate incoming data structure
+ Implement caching mechanism
+ Set up real-time update handlers
+Calculation System:
+ Implement goblin line calculations using PrizePicks offsets
+ Implement demon line calculations using PrizePicks offsets
+ Calculate win probabilities based on projections
+ Apply correct multipliers from PrizePicks
+Visual Implementation:
+ Use actual PrizePicks goblin/demon images
+ Display real pick counts with fire icon
+ Show accurate team colors and player images
+ Implement confidence-based styling
+ Create responsive layouts
+Filter System:
+ Implement goblin filter (easier bets)
+ Implement demon filter (harder bets)
+ Implement value bet detection
+ Add high-confidence filter option
+Quality Assurance:
+ Verify all calculations use numeric values only
+ Confirm PrizePicks assets load correctly
+ Test filter accuracy with real data
+ Validate mobile responsiveness
+ Ensure error handling works properly
+Performance Optimization
+javascript
+
+Copy
+const performanceOptimization = {
+  // Caching Strategy
+  caching: {
+    processedProps: new Map(), // Cache calculated goblin/demon values
+    playerImages: new Map(),   // Cache loaded player images
+    teamColors: new Map(),     // Cache team color lookups
+    ttl: CACHE_TTL_MINUTES
+  },
+  
+  // Rendering Optimization
+  rendering: {
+    virtualScrolling: true,
+    lazyLoadImages: true,
+    debounceFilters: FILTER_DEBOUNCE_MS,
+    batchUpdates: true
+  },
+  
+  // Data Processing
+  processing: {
+    useWebWorkers: true,
+    chunkSize: PROCESSING_CHUNK_SIZE,
+    prioritizeVisible: true
+  }
+};
+Success Metrics
+The implementation is successful when:
+
+All prop cards display real PrizePicks player data
+Goblin/demon calculations use PrizePicks' actual offsets and multipliers
+Visual assets match PrizePicks' official goblin/demon imagery
+Win probability calculations are accurate and numeric
+Filters correctly categorize props by risk/reward profile
+Real-time updates maintain data freshness
+User experience remains smooth and responsive
+Error states are handled gracefully with appropriate fallbacks

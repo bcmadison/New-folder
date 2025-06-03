@@ -1,0 +1,16 @@
+{
+  "total_messages": 3,
+  "avg_message_length": 2298183.3333333335,
+  "total_characters": 28,
+  "total_words": 3,
+  "total_lines": 9,
+  "message_lengths": {
+    "min": 19,
+    "max": 6893975,
+    "distribution": {
+      "short": 1,
+      "medium": 0,
+      "long": 2
+    }
+  }
+}

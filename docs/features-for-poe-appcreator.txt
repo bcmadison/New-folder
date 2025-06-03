@@ -1,0 +1,86 @@
+AI SPORTS BETTING ANALYTICS PLATFORM: FEATURES FOR POE.COM APP CREATOR
+====================================================================
+
+This document lists all features, improvements, and requirements added or enhanced in the React/Vite codebase that must be reflected in the Poe.com AppCreator UI. Please ensure the UI/UX is updated to match these capabilities and user expectations.
+
+---
+
+1. **Unified Real-Time Data Integration**
+   - All data (props, entries, news, sentiment, odds, etc.) is now sourced live from remote APIs (Sportradar, TheOdds, DailyFantasy, ESPN, Twitter, Reddit, etc.).
+   - No mock or placeholder data is used anywhere in the app.
+   - UI must show live, up-to-date information and handle loading states gracefully.
+
+2. **Money Maker ("Let's Get Money") Feature**
+   - Entry amount input with premium $ symbol styling.
+   - Requires 84%+ win probability minimum for all suggested lineups.
+   - Scans all props, finds the highest-paying 2-leg combination with 84%+ win rate and team diversification.
+   - Real-time calculation: payout, legs, win probability update as entry amount changes.
+   - UI must display: entry amount, min win rate (84%), max payout, optimal legs, win probability, and detailed lineup breakdown.
+   - Loading/processing state and error state ("No 84%+ win probability lineup found").
+
+3. **Prop Cards with Goblin/Demon System**
+   - Each prop card shows:
+     - 💰 emoji for goblins (80%+ win rate)
+     - 👹 emoji for demons (35%- win rate)
+     - ⇄ emoji for normal
+     - Real player name, team, stat, line, percentage, and fire count
+     - ESPN news link if available
+     - Sentiment badge (▲/▼) with color and tooltip
+   - Filter system: High Win %, High Payout, Value Bets, Clear All
+   - Clicking a card opens a detail modal with all line options and selection actions.
+
+4. **Entry Tracking System**
+   - Shows all submitted entries with status (Won/Lost/Pending), progress bars (red/green/grey), and payout calculations.
+   - Clickable entries open a detailed modal with pick-by-pick progress, badges, and visual indicators.
+   - UI must support live updates and clear visual feedback for each entry.
+
+5. **Premium UI/UX Design**
+   - Glass morphism effects, backdrop blur, premium input styling, gradient backgrounds, and modern card design.
+   - Responsive design: mobile-optimized, touch-friendly, slide-out sidebar, proper scaling.
+   - Animations: live odds update with yellow flash, card hover effects, smooth transitions, loading spinners.
+   - Dark mode toggle and persistent theme.
+
+6. **Betslip & Calculations**
+   - Click prop → adds to betslip, real-time payout updates, combined odds, multiplier display.
+   - Team diversification enforced for 2-leg entries, minimum 2 picks, entry amount validation.
+   - Submission creates entry, which appears in tracking section.
+   - UI must clearly show betslip, validation errors, and submission feedback.
+
+7. **Live ESPN Headlines & Sentiment**
+   - ESPN headlines ticker and player-specific news links.
+   - Social sentiment analysis (Twitter, Reddit, News) with trending badges and tooltips.
+   - UI must display trending players, sentiment scores, and news links contextually.
+
+8. **Performance & Analytics**
+   - Performance modal: total bets, win rate, profit, ROI, and recent bet history.
+   - ML analytics: ROI analysis, performance by sport, model accuracy trends, probability distribution charts.
+   - Kelly Criterion calculator and arbitrage calculator with results display.
+   - UI must provide clear, interactive analytics and calculators.
+
+9. **Error Handling & Data Safety**
+   - All arrays and data objects are runtime-validated; UI must handle empty, loading, or error states for all sections.
+   - Fallback messages and disabled states for missing or invalid data.
+
+10. **Sidebar Navigation & Section Routing**
+    - Sidebar includes: Dashboard, Player Props, AI Predictions, Win Probabilities, Arbitrage, Smart Lineups, Betting History, ML Analytics, Bankroll, Feature Verification, Settings.
+    - Each section must be accessible and visually distinct, with active state and smooth transitions.
+
+11. **Settings & Feature Verification**
+    - Settings: dark mode, compact view, notification toggles, data export, clear all data.
+    - Feature Verification section with copyable instructions for QA/testing.
+
+12. **General Improvements**
+    - All .map() and .find() calls are now guarded; UI must never break due to missing or malformed data.
+    - All user actions (refresh, submit, clear, etc.) provide instant visual feedback (toasts, spinners, etc.).
+    - All player/team/stat/line/percentage fields are always present and validated before rendering.
+
+---
+
+**ACTION ITEMS FOR UI/UX DESIGNERS & DEVELOPERS:**
+- Review all new and improved features above.
+- Ensure the UI matches the advanced, premium, and animated look/feel of the HTML preview.
+- Add/adjust UI elements to support all new data, controls, and error states.
+- Test all features on desktop and mobile, including edge cases (no data, slow data, errors).
+- Coordinate with backend/data team to ensure all live data is surfaced and displayed as described.
+
+If you have any questions about a feature or need a sample UI, refer to the HTML preview or contact the engineering team. 

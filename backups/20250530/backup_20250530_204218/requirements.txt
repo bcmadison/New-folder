@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+httpx
+pydantic
+pandas
+numpy
+scikit-learn
+xgboost
+lightgbm
+shap
+catboost
+prophet
+matplotlib

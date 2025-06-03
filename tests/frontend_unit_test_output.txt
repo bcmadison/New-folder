@@ -1,0 +1,14 @@
+
+> ai-sports-betting-analytics@0.0.1 test
+> jest src/test/unit/useAppStore.test.ts
+
+  console.log
+    [PerformanceTrackingService] Initialized
+
+      at new log (src/services/performanceTracking.ts:19:13)
+
+  console.log
+    [UnifiedMonitor] Initialized
+
+      at new log (src/core/UnifiedMonitor.ts:33:13)
+

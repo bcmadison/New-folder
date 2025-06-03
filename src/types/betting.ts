@@ -1,0 +1,1 @@
+// This file is now empty. Betting types are defined in '../../shared/betting'. 

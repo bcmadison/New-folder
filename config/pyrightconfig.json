@@ -1,0 +1,12 @@
+{
+  "include": ["backend"],
+  "exclude": ["**/node_modules", "**/__pycache__"],
+  "typeCheckingMode": "strict",
+  "reportMissingTypeStubs": true,
+  "reportMissingImports": true,
+  "reportMissingTypeArgument": true,
+  "reportUnknownParameterType": true,
+  "reportUnknownVariableType": true,
+  "reportUnknownMemberType": true,
+  "reportUnknownArgumentType": true
+}

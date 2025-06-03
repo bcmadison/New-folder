@@ -1,0 +1,17 @@
+2025-06-02 04:44:06,018 - app - INFO - Logger started - Session: 20250602_044406
+2025-06-02 04:44:06,018 - app - INFO - Backend server starting...
+INFO:     Started server process [2860]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+ERROR:    [Errno 10048] error while attempting to bind on address ('127.0.0.1', 8000): [winerror 10048] only one usage of each socket address (protocol/network address/port) is normally permitted
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+2025-06-02 04:44:09,190 - app - INFO - Exporting logs...
+[DEBUG] load_artifacts called
+[DEBUG] MODEL_PATH: C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp\advanced\models_store\final_prediction_model.joblib exists: True
+[DEBUG] SCALER_PATH: C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp\advanced\models_store\scaler.joblib exists: True
+[DEBUG] SELECTED_FEATURES_PATH: C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp\advanced\models_store\selected_features.json exists: True
+[DEBUG] Loaded selected_features.json: {'selected_feature_indices': [0, 1, 2, 3], 'feature_order': ['goals', 'win', 'avg_goals_last_5', 'win_streak']}
+[DEBUG] Model, scaler, and feature selection data loaded successfully.
+
+Logs saved to: logs/session_20250602_044406.log

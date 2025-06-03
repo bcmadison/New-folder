@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "id": "101",
+      "type": "projection",
+      "attributes": {
+        "name": "LeBron James",
+        "team": "LAL",
+        "stat_type": "Points",
+        "line": 27.5,
+        "over_odds": 1.85,
+        "under_odds": 1.95,
+        "game_time": "2025-06-02T19:00:00Z",
+        "league": "NBA"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "102",
+      "type": "projection",
+      "attributes": {
+        "name": "Stephen Curry",
+        "team": "GSW",
+        "stat_type": "3-PT Made",
+        "line": 4.5,
+        "over_odds": 2.05,
+        "under_odds": 1.75,
+        "game_time": "2025-06-02T21:30:00Z",
+        "league": "NBA"
+      },
+      "relationships": {}
+    },
+    {
+      "id": "103",
+      "type": "projection",
+      "attributes": {
+        "name": "Nikola Jokic",
+        "team": "DEN",
+        "stat_type": "Rebounds",
+        "line": 12.5,
+        "over_odds": 1.90,
+        "under_odds": 1.90,
+        "game_time": "2025-06-02T20:00:00Z",
+        "league": "NBA"
+      },
+      "relationships": {}
+    }
+  ],
+  "included": []
+} 

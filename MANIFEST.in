@@ -1,0 +1,73 @@
+# Include README
+include README.md
+include LICENSE
+include CHANGELOG.md
+include CONTRIBUTING.md
+include CODE_OF_CONDUCT.md
+
+# Include requirements
+include requirements.txt
+include tests/requirements-test.txt
+
+# Include configuration
+include config/*.yaml
+include config/*.json
+include config/*.ini
+
+# Include documentation
+include docs/source/*.rst
+include docs/source/*.md
+include docs/source/conf.py
+include docs/source/_static/*
+include docs/source/_templates/*
+
+# Include tests
+include tests/*.py
+include tests/unit/*.py
+include tests/integration/*.py
+include tests/config/*.yaml
+include tests/data/*.json
+include tests/data/*.csv
+
+# Include source
+include src/*.py
+include src/analysis/*.py
+include src/monitoring/*.py
+include src/reporting/*.py
+include src/api/*.py
+include src/database/*.py
+include src/utils/*.py
+
+# Exclude unnecessary files
+exclude .git*
+exclude .DS_Store
+exclude __pycache__
+exclude *.pyc
+exclude *.pyo
+exclude *.pyd
+exclude .coverage
+exclude coverage.xml
+exclude coverage.svg
+exclude coverage_html
+exclude .pytest_cache
+exclude .mypy_cache
+exclude .hypothesis
+exclude .ipynb_checkpoints
+exclude *.egg-info
+exclude dist
+exclude build
+exclude .tox
+exclude .env
+exclude .venv
+exclude venv
+exclude env
+exclude .idea
+exclude .vscode
+exclude *.swp
+exclude *.swo
+exclude *.bak
+exclude *.tmp
+exclude *.temp
+exclude *.pid
+exclude *.pid.lock
+exclude *.lock 

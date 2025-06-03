@@ -1,0 +1,221 @@
+==============================
+COPILOT EXECUTION PROMPT
+==============================
+
+You are an advanced AI code architect. Before generating any code, you MUST:
+
+1. **Read this entire guide thoroughly.**
+2. **Analyze all described features, files, and architecture for possible consolidations, abstractions, and optimizations.**
+   - Identify duplicate logic, redundant files, and opportunities for reusable utilities or hooks.
+   - Look for state management, API, and UI patterns that can be unified or simplified.
+   - Consider merging similar services, hooks, or components where appropriate.
+   - Propose a modern, maintainable, and scalable structure before writing any code.
+3. **Document your consolidation and optimization plan FIRST.**
+   - List all files, features, or patterns you will merge, refactor, or remove.
+   - Explain the reasoning for each consolidation or architectural change.
+   - Only after this plan is complete, proceed to code generation.
+4. **When rebuilding, follow best practices for performance, maintainability, and user experience.**
+   - Ensure all features, tests, and integrations described below are implemented.
+   - Maintain or improve on the design, UX, and architectural principles outlined.
+
+---
+
+[BEGIN PROJECT GUIDE]
+
+==============================
+FULL PROJECT GUIDE: AI SPORTS BETTING ANALYTICS PLATFORM
+==============================
+
+---
+
+SECTION 1: EXTENSIVE FUNCTIONALITY OVERVIEW
+-------------------------------------------
+
+This application is a real-time, AI-powered sports betting analytics platform inspired by Poe App Creator, designed for both casual and professional bettors. It provides:
+
+- **Live Data Integrations:** Real-time odds, props, and player data from PrizePicks, Sportradar, TheOdds, DailyFantasy, ESPN, Twitter, Reddit, and more.
+- **Premium UI/UX:** Glassmorphism, gradients, dark mode, responsive layouts, and smooth transitions.
+- **Money Maker Engine:** Finds optimal 2–6 leg parlays with 84%+ win probability, team diversification, and real-time payout calculation.
+- **Prop Cards:** Show live win rates, sentiment, ESPN/news links, and open detail modals.
+- **Entry Tracking:** Real-time, animated entry progress with WebSocket sync and modal details.
+- **Analytics:** User performance (total bets, win rate, profit, ROI, history) with Chart.js, Kelly Criterion, and arbitrage scanner.
+- **Error Handling:** Global error boundary, user-friendly toasts, API error logging, retry logic, and empty/loading states.
+- **Sidebar Navigation:** Poe-style sidebar, React Router v6, mobile slide-out, deep linking, localStorage persistence, and smooth transitions.
+- **State Management:** Zustand for global state (props, entries, toasts, betslip, etc.), with actions for all major flows.
+- **Performance:** Optimized for <2s load, with performance monitoring and responsive design for all breakpoints.
+- **Feature Flags & Experiments:** Gradual rollouts, A/B testing, user segmentation, and persistent state.
+- **Plugin System:** Dynamic feature addition, third-party integrations, and feature composition.
+- **Performance Monitoring:** Distributed tracing, metric collection, error tracking, and system health.
+
+---
+
+SECTION 2: DESIGN & UX GUIDE
+----------------------------
+
+**Design Principles:**
+- Modern, glassmorphic UI with gradients and soft shadows
+- Responsive at all breakpoints (320px, 768px, 1024px, 1440px)
+- Dark mode and theme toggle throughout
+- Animated transitions (Framer Motion)
+- Consistent component structure (cards, modals, toasts, nav)
+- Accessibility: keyboard navigation, color contrast, ARIA labels
+
+**UX Patterns:**
+- Sidebar navigation with deep linking and mobile slide-out
+- Real-time updates via WebSocket and polling
+- Error boundaries at page and component level
+- Loading skeletons and spinners for async data
+- Toast notifications for all user actions and errors
+- Modals for details, confirmations, and entry tracking
+- Chart.js for analytics and performance graphs
+- Kelly Criterion and arbitrage calculators for advanced users
+- Feature flags for gradual rollouts and experiments
+
+**Poe Implementation Parallels:**
+- Sidebar and navigation mimic Poe's app creator
+- Glassmorphism and gradient backgrounds
+- Responsive cards and modals
+- Real-time data and animated UI feedback
+
+---
+
+SECTION 3: ENHANCED ARCHITECTURE & IMPLEMENTATION
+-----------------------------------
+
+**Core Architecture Principles:**
+1. **Microservices Architecture:**
+   - Separate services for data ingestion, analytics, and user management
+   - Event-driven communication between services
+   - Containerized deployment with Docker
+   - Kubernetes orchestration for scalability
+
+2. **Data Flow:**
+   - Real-time data pipeline using Apache Kafka
+   - Caching layer with Redis
+   - Time-series database for analytics (InfluxDB)
+   - Document store for user data (MongoDB)
+
+3. **Security:**
+   - JWT-based authentication
+   - Rate limiting and DDoS protection
+   - Data encryption at rest and in transit
+   - Regular security audits and penetration testing
+
+4. **Performance Optimization:**
+   - Server-side rendering for critical pages
+   - Code splitting and lazy loading
+   - CDN integration for static assets
+   - WebSocket optimization for real-time updates
+
+**File Structure:**
+```
+src/
+├── core/                 # Core business logic
+│   ├── engine/          # Betting strategy engine
+│   ├── analytics/       # Analytics and ML models
+│   └── security/        # Security and encryption
+├── features/            # Feature modules
+│   ├── betting/         # Betting-related features
+│   ├── analytics/       # Analytics features
+│   └── social/          # Social features
+├── shared/              # Shared utilities
+│   ├── hooks/           # Custom React hooks
+│   ├── components/      # Reusable components
+│   └── utils/           # Utility functions
+├── api/                 # API integration
+│   ├── clients/         # API clients
+│   └── adapters/        # Data adapters
+└── infrastructure/      # Infrastructure code
+    ├── config/          # Configuration
+    └── monitoring/      # Monitoring and logging
+```
+
+**Key Implementation Details:**
+
+1. **State Management:**
+   - Zustand for global state
+   - React Query for server state
+   - Local storage for persistence
+   - WebSocket for real-time updates
+
+2. **API Integration:**
+   - RESTful endpoints for CRUD operations
+   - GraphQL for complex queries
+   - WebSocket for real-time data
+   - Rate limiting and caching
+
+3. **Testing Strategy:**
+   - Unit tests with Jest
+   - Integration tests with Cypress
+   - E2E tests with Playwright
+   - Performance testing with Lighthouse
+
+4. **Deployment Pipeline:**
+   - CI/CD with GitHub Actions
+   - Automated testing
+   - Docker containerization
+   - Kubernetes deployment
+
+---
+
+SECTION 4: DEVELOPMENT WORKFLOW
+-------------------------------
+
+1. **Setup:**
+   ```bash
+   # Install dependencies
+   npm install
+   
+   # Start development server
+   npm run dev
+   
+   # Run tests
+   npm test
+   ```
+
+2. **Development Process:**
+   - Feature branch workflow
+   - Pull request reviews
+   - Automated testing
+   - Code quality checks
+
+3. **Deployment:**
+   - Staging environment
+   - Production deployment
+   - Monitoring and alerts
+   - Rollback procedures
+
+4. **Maintenance:**
+   - Regular updates
+   - Security patches
+   - Performance optimization
+   - User feedback integration
+
+---
+
+SECTION 5: PERFORMANCE METRICS
+-----------------------------
+
+1. **Load Time:**
+   - Initial load < 2s
+   - Time to interactive < 3s
+   - First contentful paint < 1s
+
+2. **Real-time Updates:**
+   - WebSocket latency < 100ms
+   - Data refresh rate: 1s
+   - UI update time < 50ms
+
+3. **Resource Usage:**
+   - Memory usage < 100MB
+   - CPU usage < 30%
+   - Network requests < 50/s
+
+4. **Error Rates:**
+   - API error rate < 0.1%
+   - Client error rate < 0.01%
+   - Recovery time < 1s
+
+---
+
+This guide serves as a comprehensive blueprint for rebuilding the AI Sports Betting Analytics Platform. Follow these guidelines to ensure a modern, maintainable, and scalable application that meets all requirements while maintaining high performance and user experience standards. 

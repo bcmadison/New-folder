@@ -1,0 +1,9 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-8.3.5, pluggy-1.6.0
+rootdir: C:\Users\bcmad\OneDrive\Desktop\ProtoTypeMark1\finalApp
+plugins: anyio-4.9.0
+collected 1 item
+
+backend\tests\unit\test_health.py .                                      [100%]
+
+============================== 1 passed in 0.03s ==============================

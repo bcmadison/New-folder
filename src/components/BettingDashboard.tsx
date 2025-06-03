@@ -1,0 +1,1 @@
+const WS_ENDPOINT = import.meta.env.VITE_WS_ENDPOINT || 'wss://ws.your-production-domain.com'; 
